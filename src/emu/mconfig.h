@@ -113,6 +113,8 @@ ATTR_COLD device_t *MACHINE_CONFIG_NAME(_name)(machine_config &config, device_t 
 { \
 	devcb_base *devcb = nullptr; \
 	(void)devcb; \
+	class ksnotifier_t *ksnotifier = nullptr; \
+	(void)ksnotifier; \
 	if (owner == nullptr) owner = config.device_add(nullptr, "root", config.gamedrv().type, 0);
 
 /**
@@ -126,6 +128,8 @@ ATTR_COLD device_t *MACHINE_CONFIG_NAME(_name)(machine_config &config, device_t 
 { \
 	devcb_base *devcb = nullptr; \
 	(void)devcb; \
+	class ksnotifier_t *ksnotifier = nullptr; \
+	(void)ksnotifier; \
 	assert(owner != nullptr);
 
 /**
@@ -140,6 +144,8 @@ ATTR_COLD device_t *MACHINE_CONFIG_NAME(_name)(machine_config &config, device_t 
 { \
 	devcb_base *devcb = nullptr; \
 	(void)devcb; \
+	class ksnotifier_t *ksnotifier = nullptr; \
+	(void)ksnotifier; \
 	owner = MACHINE_CONFIG_NAME(_base)(config, owner, device); \
 	assert(owner != nullptr);
 
