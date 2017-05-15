@@ -1,8 +1,8 @@
 // license:BSD-3-Clause
 // copyright-holders:Olivier Galibert
 #pragma once
-#ifndef __KVIDEODAC_H__
-#define __KVIDEODAC_H__
+#ifndef MAME_VIDEO_KVIDEODAC_H
+#define MAME_VIDEO_KVIDEODAC_H
 
 // The init callback is called at startup, when the bitmap size
 // changes for whatever reason, and when loading a state.  The
@@ -17,6 +17,18 @@
 // The class proposes either bitmap_update to call the callbacks as
 // needed and compute the new image, or screen_update with the normal
 // screen updating interface.
+
+#define MCFG_KVIDEODAC_ADD(_tag, _palette_tag, _shadow_mask, _shadow_level, _highlight_mask, _highlight_level) \
+	MCFG_DEVICE_ADD(_tag, KVIDEODAC, 0)		 \
+	downcast<kvideodac_device *>(device)->set_info(_palette_tag, _shadow_mask, _shadow_level, _highlight_mask, _highlight_level);
+
+#define MCFG_KVIDEODAC_SET_INIT_CB(_tag, _class, _method)					\
+	downcast<kvideodac_device *>(device)->set_init_cb(kvideodac_device::init_cb(&_class::_method, #_class "::" #_method, _tag, (_class *)nullptr));
+
+#define MCFG_KVIDEODAC_SET_UPDATE_CB(_tag, _class, _method)				\
+	downcast<kvideodac_device *>(device)->set_update_cb(kvideodac_device::update_cb(&_class::_method, #_class "::" #_method, _tag, (_class *)nullptr));
+
+#define MCFG_KVIDEODAC_SET_SCREEN MCFG_VIDEO_SET_SCREEN
 
 class kvideodac_device : public device_t
 {
@@ -64,19 +76,6 @@ private:
 	static void generate_table(uint8_t *table, double level);
 };
 
-extern const device_type KVIDEODAC;
-
-
-#define MCFG_KVIDEODAC_ADD(_tag, _palette_tag, _shadow_mask, _shadow_level, _highlight_mask, _highlight_level) \
-	MCFG_DEVICE_ADD(_tag, KVIDEODAC, 0)		 \
-		downcast<kvideodac_device *>(device)->set_info(_palette_tag, _shadow_mask, _shadow_level, _highlight_mask, _highlight_level);
-
-#define MCFG_KVIDEODAC_SET_INIT_CB(_tag, _class, _method)					\
-	downcast<kvideodac_device *>(device)->set_init_cb(kvideodac_device::init_cb(&_class::_method, #_class "::" #_method, _tag, (_class *)nullptr));
-
-#define MCFG_KVIDEODAC_SET_UPDATE_CB(_tag, _class, _method)				\
-	downcast<kvideodac_device *>(device)->set_update_cb(kvideodac_device::update_cb(&_class::_method, #_class "::" #_method, _tag, (_class *)nullptr));
-
-#define MCFG_KVIDEODAC_SET_SCREEN MCFG_VIDEO_SET_SCREEN
+DECLARE_DEVICE_TYPE(KVIDEODAC, kvideodac_device)
 
 #endif

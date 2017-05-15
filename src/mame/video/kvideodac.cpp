@@ -4,11 +4,10 @@
 #include "emu.h"
 #include "kvideodac.h"
 
-
-const device_type KVIDEODAC = device_creator<kvideodac_device>;
+DEFINE_DEVICE_TYPE(KVIDEODAC, kvideodac_device, "kvideodac", "Konami Video DAC")
 
 kvideodac_device::kvideodac_device(const machine_config &mconfig, const char *tag, device_t *owner, uint32_t clock)
-	: device_t(mconfig, KVIDEODAC, "KVIDEODAC Mixer", tag, owner, clock, "kvideodac", __FILE__)
+	: device_t(mconfig, KVIDEODAC, tag, owner, clock)
 {
 	m_palette_tag = nullptr;
 	m_palette = nullptr;

@@ -13,6 +13,9 @@
 #define MCFG_K053251_SET_UPDATE_CB(_tag, _class, _method)				\
 	downcast<k053251_device *>(device)->set_update_cb(k053251_device::update_cb(&_class::_method, #_class "::" #_method, _tag, (_class *)nullptr));
 
+class k053251_device : public device_t
+{
+public:
 	enum
 	{
 		CI0 = 0,
@@ -22,9 +25,6 @@
 		CI4
 	};
 
-class k053251_device : public device_t
-{
-public:
 	enum {
 		LAYER0_COLOR,
 		LAYER1_COLOR,
