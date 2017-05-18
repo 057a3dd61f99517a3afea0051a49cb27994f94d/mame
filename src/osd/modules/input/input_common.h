@@ -418,8 +418,8 @@ public:
 
 class osd_options;
 
-typedef std::chrono::high_resolution_clock clock_type;
-typedef std::chrono::time_point<std::chrono::high_resolution_clock> timepoint_type;
+typedef std::chrono::steady_clock clock_type;
+typedef std::chrono::time_point<std::chrono::steady_clock> timepoint_type;
 
 // 10 milliseconds polling interval
 #define MIN_POLLING_INTERVAL 10
